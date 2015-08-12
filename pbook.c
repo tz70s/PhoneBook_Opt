@@ -1,9 +1,8 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 #define MAX_LNSIZE 16
 
-typedef struct PhoneBook *pPointer;
-typedef struct PhoneBook{
+typedef struct _PHONE_BOOK_ENTRY {
 	char LastName[MAX_LNSIZE];
 	char FirstName[16];
 	char email[16];
@@ -14,14 +13,14 @@ typedef struct PhoneBook{
 	char city[16];
 	char state[2];
 	char zip[5];
-    pPointer pNext;
-};
+   	struct _PHONE_BOOK_ENTRY *pNext;
+} PhoneBook;
 
-pPointer FindName(char Last[] , pPointer pHead)
+PhoneBook *FindName(char Last[] , PhoneBook *pHead)
 {
-	while (pHead !=NULL )
+	while (pHead !=NULL)
 	{
-		if(stricmp(Last , pHead->LastName ) == 0)
+		if(strcasecmp(Last , pHead->LastName ) == 0)
 			return pHead;
 		pHead = pHead->pNext;
 	}
