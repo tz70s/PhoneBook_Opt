@@ -5,7 +5,7 @@
 typedef struct _PHONE_BOOK_ENTRY {
 	char LastName[MAX_LNSIZE];
 	struct _PHONE_BOOK_ENTRY *pNext;
-	struct _PHONE_BOOK_DETAIL *PhoneDetail;
+	struct _PHONE_BOOK_DETAIL *PhoneDetail;/*Pointing to Detail*/
 } PhoneBook;
 
 typedef struct _PHONE_BOOK_DETAIL {
@@ -38,8 +38,6 @@ void sizePrint()
 {
 	printf("The PhoneBook size Before : %lu\n",sizeof(PhoneOrigin));
 	printf("The PhoneBook size After : %lu\n",sizeof(PhoneBook));
-	printf("phead size : %lu\n",sizeof(PhoneBook *));
-	
 }
 
 PhoneBook *FindName(char Last[] , PhoneBook *pHead)
