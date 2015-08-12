@@ -1,7 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+void sizePrint();
 
 int main(void)
 {
-	printf("helloworld\n");
+	sizePrint();
+	printf("pointer size in my comp : %lu\n",sizeof(char *));
 	return 0;
 }
