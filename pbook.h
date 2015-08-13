@@ -4,7 +4,7 @@
 typedef struct _PHONE_BOOK_ENTRY {
 	char LastName[MAX_LNSIZE];
 	struct _PHONE_BOOK_ENTRY *pNext;
-	//struct _PHONE_BOOK_DETAIL *PhoneDetail;/*Pointing to Detail*/
+	struct _PHONE_BOOK_DETAIL *PhoneDetail;/*Pointing to Detail*/
 } PhoneBook;
 
 typedef struct _PHONE_BOOK_DETAIL {
@@ -32,5 +32,3 @@ typedef struct _PHONE_BOOK_ORIGIN {
 	char zip[5];
 	struct _PHONE_BOOK_ORIGIN *pONext;
 } PhoneOrigin;
-
-PhoneOrigin *starto;
