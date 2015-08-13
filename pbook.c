@@ -1,47 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#define MAX_LNSIZE 16
+#include "pbook.h"
 
-typedef struct _PHONE_BOOK_ENTRY {
-	char LastName[MAX_LNSIZE];
-	struct _PHONE_BOOK_ENTRY *pNext;
-	struct _PHONE_BOOK_DETAIL *PhoneDetail;/*Pointing to Detail*/
-} PhoneBook;
+char *randData();
+PhoneBook *start = NULL;
 
-typedef struct _PHONE_BOOK_DETAIL {
-	char FirstName[16];
-	char email[16];
-	char phone[10];
-	char cell[10];
-	char addr1[16];
-	char addr2[16];
-	char city[16];
-	char state[2];
-	char zip[5];
-} PhoneDetail;
-
-typedef struct _PHONE_BOOK_ORIGIN {
-	char LastName[MAX_LNSIZE];
-	char FirstName[16];
-	char email[16];
-	char phone[10];
-	char cell[10];
-	char addr1[16];
-	char addr2[16];
-	char city[16];
-	char state[2];
-	char zip[5];
-	struct _PHONE_BOOK_ORIGIN *pONext;
-} PhoneOrigin;
-
-void sizePrint()
+PhoneBook *FindName(char Last[])
 {
-	printf("The PhoneBook size Before : %lu\n",sizeof(PhoneOrigin));
-	printf("The PhoneBook size After : %lu\n",sizeof(PhoneBook));
-}
-
-PhoneBook *FindName(char Last[] , PhoneBook *pHead)
-{
+	PhoneBook *pHead = (PhoneBook*)malloc(sizeof(PhoneBook));
 	while (pHead !=NULL)
 	{
 		if(strcasecmp(Last , pHead->LastName ) == 0)
@@ -51,12 +18,45 @@ PhoneBook *FindName(char Last[] , PhoneBook *pHead)
 	return NULL;
 }
 
-/*
-void InsertData(char name[16])
+void InsertData(char name[])
 {
-	PhoneBook *temp;
+	PhoneBook *temp = NULL;
+	temp = (PhoneBook*)malloc(sizeof(PhoneBook));
 	strcpy(temp->LastName,name);
-	temp->pNext=start;
-	start=temp;
+	temp->pNext = start;
+	start = temp;
+	//printf("%s\n",temp->LastName);
 }
-*/
+
+void Show()
+{
+	PhoneBook *temp = start;
+	//printf("%s\n",temp->LastName);
+	while(temp!=NULL)
+	{
+		printf("%s\n",temp->LastName);
+		temp = temp->pNext;
+	}
+}
+
+void find()
+{
+	PhoneBook *temp = FindName("John");
+	printf("%s\n",temp->LastName);
+}
+
+void sizePrint()
+{
+	printf("The PhoneBook size Before : %lu\n",sizeof(PhoneOrigin));
+	printf("The PhoneBook size After : %lu\n",sizeof(PhoneBook));
+	init();
+	int count;
+	InsertData("John");
+	for(count = 0;count<10;count++)
+	{
+		InsertData(randData());
+	}
+	
+	Show();
+	find();
+}
