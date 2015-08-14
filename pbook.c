@@ -13,7 +13,7 @@ PhoneBook *FindName(char Last[])
 	while (pHead !=NULL)
 	{
 		if(strcasecmp(Last , pHead->LastName ) == 0){
-			printf("\nfind!!\n%s\n",pHead->LastName);
+			//printf("\nfind!!\n%s\n",pHead->LastName);
 			return pHead;
 		}
 		pHead = pHead->pNext;
@@ -46,19 +46,29 @@ void find()
 {
 	FindName("John");
 	PhoneBook *temp = FindName("John");
-	printf("%s\n",temp->LastName);
+	//printf("%s\n",temp->LastName);
 }
 
-void sizePrint()
+void empty()
 {
-	printf("The PhoneBook size Before : %lu\n",sizeof(PhoneOrigin));
-	printf("The PhoneBook size After : %lu\n",sizeof(PhoneBook));
+	PhoneBook *temp;
+	while(start!=NULL)
+	{
+		temp = start;
+		start = start->pNext;
+		free(temp);
+	}
+}
+
+float sizePrint(int bound)
+{
+	//printf("The PhoneBook size Before : %lu\n",sizeof(PhoneOrigin));
+	//printf("The PhoneBook size After : %lu\n",sizeof(PhoneBook));
 	init();
 	int x,y;
 	InsertData("John");
-	for(x = 0;x<10000;x++)
+	for(x = 0;x<bound;x++)
 	{
-		for(y= 0;y<1000;y++)
 		InsertData(randData());
 	}
 	
@@ -67,5 +77,7 @@ void sizePrint()
 	startTime = (float)clock()/CLOCKS_PER_SEC;
 	find();
 	endTime = (float)clock()/CLOCKS_PER_SEC;
-	printf("The split struct time \n%f\n",endTime-startTime);
+	//printf("The split struct time \n%f\n",endTime-startTime);
+	empty();
+	return endTime-startTime;
 }
